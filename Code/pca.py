@@ -15,7 +15,7 @@ from sklearn.decomposition import PCA
 directory = '../GATSol/dataset/'
 
 # Load the DataFrame with embeddings
-df = pd.read_pickle(directory + 'eSol_Test.pkl')
+df = pd.read_pickle(directory + 'eSol_Train.pkl')
 
 # Reshape embeddings
 embeddings = np.stack(df['embedding'].values)
@@ -48,16 +48,15 @@ plt.tight_layout()
 
 # Show the plot
 plt.show()
+plt.savefig('../Figures/pca.png', dpi=300)
 
 # Perform PCA with the selected number of components
 pca = PCA(n_components=d)
 pca_embeddings = pca.fit_transform(embeddings)
 print("Shape of reduced embeddings:", pca_embeddings.shape)
 
-# Create a new DataFrame for the PCA components and concatenate
-pca_columns = [f'PCA_{i+1}' for i in range(d)]
-pca_df = pd.DataFrame(pca_embeddings, columns=pca_columns)
-df = pd.concat([df, pca_df], axis=1)
+# Store each sequence's PCA components as a 2D array
+df['pca'] = [pca_embeddings[i:i+1] for i in range(pca_embeddings.shape[0])]
 
 # Save updated DataFrame
-df.to_pickle(directory + 'eSol_Test_PCA.pkl')
+df.to_pickle(directory + 'eSol_Train_PCA.pkl')

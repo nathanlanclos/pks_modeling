@@ -15,7 +15,7 @@ from sklearn.decomposition import PCA
 directory = '../GATSol/dataset/'
 
 # Load the DataFrame with embeddings
-df = pd.read_pickle(directory + 'eSol_Train.pkl')
+df = pd.read_pickle(directory + 'eSol_Test.pkl')
 
 # Reshape embeddings
 embeddings = np.stack(df['embedding'].values)
@@ -28,7 +28,10 @@ pca.fit(embeddings)
 
 # Calculate cumulative explained variance
 cumsum = np.cumsum(pca.explained_variance_ratio_)
-d = np.argmax(cumsum >= 0.95) + 1  # +1 because index 0 is the first component
+d = np.argmax(cumsum >= 0.95) + 1  # +1 because index 0 is the first 
+
+# Set 'd' if test set
+d = 284
 
 print(f"Number of components needed for 95% variance: {d}")
 
@@ -59,4 +62,4 @@ print("Shape of reduced embeddings:", pca_embeddings.shape)
 df['pca'] = [pca_embeddings[i:i+1] for i in range(pca_embeddings.shape[0])]
 
 # Save updated DataFrame
-df.to_pickle(directory + 'eSol_Train_PCA.pkl')
+df.to_pickle(directory + 'eSol_Test_PCA.pkl')

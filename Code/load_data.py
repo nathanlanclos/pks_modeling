@@ -14,10 +14,10 @@ from tqdm import tqdm
 directory = '../GATSol/dataset/'
 
 # Load CSVs
-df_train = pd.read_csv(directory + 'eSol_train.csv')
+df = pd.read_csv(directory + 'eSol_test.csv') #Replace with train/test as needed
 
 # Convert to list
-sequences_train = [(row['gene'], row['sequence']) for _, row in df_train.iterrows()]
+sequences_train = [(row['gene'], row['sequence']) for _, row in df.iterrows()]
 
 # Load the ESM-2 model and alphabet
 model, alphabet = esm.pretrained.esm2_t33_650M_UR50D()
@@ -35,5 +35,5 @@ for batch_labels, batch_strs, batch_tokens in tqdm([batch_converter([seq]) for s
     embeddings_list.append(embedding.cpu().numpy())
 
 # Add embeddings to the DataFrame and save
-df_train['embedding'] = embeddings_list
-df_train.to_pickle(directory + 'eSol_train.pkl')  # Save with embeddings
+df['embedding'] = embeddings_list
+df.to_pickle(directory + 'eSol_test.pkl')  # Save with embeddings, replace with train/test as needed

@@ -29,6 +29,7 @@ for df in dfs:
     aromaticities = []
     gravies = []
     isoelectric_points = []
+    flexibilities = []
     lengths = []
     aacs = []
     ctdc_dict = {}  # Dictionary to store ctdc features
@@ -42,8 +43,10 @@ for df in dfs:
         aromaticities.append(analysis.aromaticity())
         gravies.append(analysis.gravy())
         isoelectric_points.append(analysis.isoelectric_point())
+        flexibilities.append(analysis.flexibility())
         lengths.append(float(protlearn.features.length(sequence)[0]))
         aacs.append(protlearn.features.aac(sequence))
+    
         
         # Extract ctdc features
         ctdc_values, ctdc_labels = protlearn.features.ctdc(sequence)
@@ -60,6 +63,7 @@ for df in dfs:
     df['aromaticity'] = aromaticities
     df['gravy'] = gravies
     df['isoelectric_point'] = isoelectric_points
+    df['flexibility'] = flexibilities
     df['length'] = lengths
     df['aac'] = aacs
 

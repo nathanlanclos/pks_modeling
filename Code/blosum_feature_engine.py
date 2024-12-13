@@ -1,3 +1,8 @@
+"""
+Created on Tue Dec 12 2024
+This script generates all the blosum based features, works with .csv/.pkl. Call in notebooks
+@author: Nathan
+"""
 import pandas as pd
 
 def process_file_with_blosum(input_file, output_file, blosum_matrix):

@@ -7,6 +7,8 @@ Created on Thu Dec  5 11:16:03 2024
 """
 
 import pandas as pd
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis
+from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -18,6 +20,7 @@ directory = '../GATSol/dataset/'
 # Load CSVs
 df_train = pd.read_pickle(directory + 'eSol_train.pkl')
 df_test = pd.read_pickle(directory + 'eSol_test.pkl')
+
 
 continuous_column = 'solubility'  # Replace with your target column name
 binary_column = 'binary_solubility'

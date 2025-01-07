@@ -59,7 +59,7 @@ pca_embeddings = pca.fit_transform(embeddings)
 print("Shape of reduced embeddings:", pca_embeddings.shape)
 
 # Store each sequence's PCA components as a 2D array
-df['pca'] = [pca_embeddings[i:i+1] for i in range(pca_embeddings.shape[0])]
+df['embeddings'] = [pca_embeddings[i:i+1] for i in range(pca_embeddings.shape[0])]
 
 # Save updated DataFrame
 df.to_pickle(directory + 'eSol_Test_PCA.pkl')

@@ -65,7 +65,7 @@ for df in dfs:
     df['isoelectric_point'] = isoelectric_points
     df['flexibility'] = flexibilities
     df['length'] = lengths
-    df['aac'] = aacs
+    # df['aac'] = aacs 
 
     # Add ctdc features to the dataframe
     for label, values in ctdc_dict.items():
